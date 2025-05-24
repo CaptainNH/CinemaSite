@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <style>
         body,
@@ -16,21 +17,21 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background-color: #121212;
+            color: #fff;
+            border-bottom: 1px solid #222;
         }
 
         .logo {
             font-size: 1.8em;
             font-weight: bold;
-            color: #b10d0d;
+            color: #ffffff;
         }
 
         .auth-buttons a,
         .auth-buttons form button {
-            background-color: #b10d0d;
-            color: #fff;
+            background-color: #ffffff;
+            color: #121212;
             padding: 8px 16px;
             margin-left: 10px;
             border: none;
@@ -43,7 +44,7 @@
 
         .auth-buttons a:hover,
         .auth-buttons form button:hover {
-            background-color: #900a0a;
+            background-color: #dddddd;
         }
 
         .auth-buttons form {
@@ -51,11 +52,11 @@
         }
 
         .date-panel {
-            background-color: #fff;
+            background-color: #fafafa;
             color: #222;
             padding: 30px 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #ccc;
         }
 
         .date-panel label {
@@ -73,13 +74,13 @@
 
         .poster-section {
             padding: 40px 40px;
-            background-color: #f7f7f7;
+            background-color: #121212;
         }
 
         .poster-title {
             text-align: center;
             font-size: 2.2em;
-            color: #222;
+            color: #fff;
             margin-bottom: 40px;
         }
 
@@ -90,12 +91,13 @@
         }
 
         .poster-card {
-            background: #fff;
+            background: #1e1e1e;
             border-radius: 4px;
             padding: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
             text-align: center;
             transition: transform 0.3s ease;
+            color: #fff;
         }
 
         .poster-card:hover {
@@ -112,18 +114,18 @@
         }
 
         .poster-placeholder {
-            background-color: #ddd;
+            background-color: #2c2c2c;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
+            color: #aaa;
             font-size: 0.95em;
         }
 
         .poster-card h3 {
             font-size: 1.15em;
             margin-bottom: 12px;
-            color: #222;
+            color: #fff;
         }
 
         .session-row {
@@ -134,8 +136,9 @@
             align-items: center;
         }
 
-        .btn-buy,
-        .btn[disabled] {
+        .btn-buy {
+            background-color: #ffffff;
+            color: #121212;
             padding: 6px 12px;
             border: none;
             border-radius: 4px;
@@ -144,15 +147,17 @@
             cursor: pointer;
         }
 
-        .btn-buy {
-            background-color: #b10d0d;
-            color: #fff;
+        .btn-buy:hover {
+            background-color: #e0e0e0;
         }
 
         .btn[disabled] {
-            background-color: #ccc;
-            color: #555;
+            background-color: #777;
+            color: #ccc;
             cursor: default;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
         }
 
         .no-sessions-msg {
@@ -160,6 +165,15 @@
             font-size: 1.3em;
             margin-top: 60px;
             color: #888;
+        }
+
+        .footer {
+            background-color: #121212;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            border-top: 1px solid #222;
         }
 
         @media (max-width: 768px) {
@@ -246,4 +260,8 @@
             @endforelse
         </div>
     </section>
+
+    <div class="footer">
+        &copy; {{ date('Y') }} Смотрим кино. Все права защищены.
+    </div>
 @endsection

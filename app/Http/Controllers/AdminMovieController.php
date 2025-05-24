@@ -30,8 +30,8 @@ class AdminMovieController extends Controller
         ]);
 
         Movie::create($data);
-        
-        return redirect()->route('admin.movies.index')
+
+        return redirect()->route('cabinet')
             ->with('success', 'Фильм успешно добавлен!');
     }
 
@@ -53,16 +53,16 @@ class AdminMovieController extends Controller
     {
         // Обновить данные фильма
         $movie = Movie::findOrFail($id);
-        
+
         $data = $request->validate([
             'title' => 'required|string|max:140',
             'description' => 'nullable|string',
             // Добавьте другие поля по необходимости
         ]);
-        
+
         $movie->update($data);
-        
-        return redirect()->route('admin.movies.index')
+
+        return redirect()->route('cabinet')
             ->with('success', 'Фильм успешно обновлен!');
     }
 
@@ -71,8 +71,8 @@ class AdminMovieController extends Controller
         // Удалить фильм
         $movie = Movie::findOrFail($id);
         $movie->delete();
-        
-        return redirect()->route('admin.movies.index')
+
+        return redirect()->route('cabinet')
             ->with('success', 'Фильм успешно удалён!');
     }
 }

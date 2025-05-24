@@ -81,7 +81,7 @@ class MovieController extends Controller
 
         $movie->update($validated);
 
-        return redirect()->route('admin.movies.index')->with('success', 'Фильм успешно обновлен!');
+        return redirect()->route('cabinet')->with('success', 'Фильм успешно обновлен!');
     }
 
     // Удалить фильм
@@ -94,6 +94,6 @@ class MovieController extends Controller
 
         $movie->delete();
 
-        return redirect()->route('admin.movies.index')->with('success', 'Фильм успешно удален!');
+        return redirect()->route('cabinet')->with('success', 'Фильм успешно удален!');
     }
 }

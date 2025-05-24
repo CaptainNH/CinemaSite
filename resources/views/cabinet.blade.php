@@ -1,122 +1,240 @@
 @extends('layouts.app')
+
 @section('content')
     <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f7f7f7;
+            color: #222;
+            min-height: 100vh;
+        }
+
         .cabinet-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background: linear-gradient(90deg, #2463eb 0%, #10b2f8 100%);
+            align-items: center;
+            background-color: #121212;
             color: #fff;
-            padding: 1.2rem 2.5vw 1.1rem 2vw;
-            border-radius: 0 0 14px 14px;
-            margin-bottom: 1.7rem;
+            padding: 20px 40px;
+            border-bottom: 1px solid #222;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 2rem;
         }
 
         .welcome {
-            font-size: 1.35em;
+            font-size: 1.5em;
             font-weight: 700;
         }
 
         .cabinet-actions {
             display: flex;
-            gap: 1.2em;
+            gap: 12px;
         }
 
-        .cabinet-actions form,
-        .cabinet-actions a {
+        .cabinet-actions a,
+        .cabinet-actions form button {
+            background-color: #ffffff;
+            color: #121212;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+
+        .cabinet-actions a:hover,
+        .cabinet-actions form button:hover {
+            background-color: #dddddd;
+        }
+
+        .cabinet-actions form {
             display: inline;
         }
 
-        .cabinet-btn {
-            padding: .5em 1.3em;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            background: #fff;
-            color: #2770d7;
-            margin-left: 0.7em;
-            transition: background 0.15s, color 0.15s;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .cabinet-btn:hover,
-        .cabinet-btn:focus-visible {
-            background: #1862ea;
+        .cabinet-actions form button.logout {
+            background-color: #c90d0d;
             color: #fff;
+            font-weight: 700;
         }
 
-        .cabinet-btn.logout {
-            color: #c90d0d;
-        }
-
-        .cabinet-btn.logout:hover {
-            background: #f8b9b9;
-            color: #a60707;
+        .cabinet-actions form button.logout:hover {
+            background-color: #a60707;
         }
 
         .cabinet-section {
-            margin: 0 auto;
             max-width: 750px;
+            margin: 0 auto 3rem;
+            padding: 0 20px;
+        }
+
+        h2 {
+            color: #121212;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         /* Список билетов */
         .ticket-list {
-            margin-top: 1.5em;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .ticket-card {
-            background: #f9fbff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px #10b2f831;
-            padding: 1.2em 1.7em;
-            margin-bottom: 1.15em;
-            display: flex;
-            flex-direction: column;
-            gap: .5em;
+            background: #1e1e1e;
+            color: #fff;
+            border-radius: 6px;
+            padding: 16px 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
         }
 
         .ticket-movie {
-            font-size: 1.10em;
-            font-weight: 500;
-            color: #1a4b9a;
-            margin-bottom: .2em;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #f0f0f0;
+            margin-bottom: 6px;
         }
 
         .ticket-info {
-            color: #0a4169;
+            font-size: 0.95em;
+            color: #ccc;
+            line-height: 1.4;
         }
 
+        .no-tickets-msg {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border: 1px solid #ffeeba;
+            font-weight: 600;
+        }
+
+        /* Панель администратора */
         .admin-panel {
-            background: #fffbe7;
-            border-radius: 10px;
-            padding: 2.2em 2em;
-            text-align: center;
-            margin-top: 2.6em;
-            box-shadow: 0 2px 10px #efbb0a15;
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 24px 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: #121212;
         }
 
         .admin-panel h2 {
-            color: #b89e1c;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: #121212;
+        }
+
+        .admin-panel .cabinet-btn {
+            background-color: #121212;
+            color: #fff;
+            margin-right: 1rem;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-panel .cabinet-btn:hover {
+            background-color: #2770d7;
+        }
+
+        .admin-panel ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .admin-panel ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+
+        .admin-panel ul li a {
+            background-color: #2770d7;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-panel ul li a:hover {
+            background-color: #1862ea;
+        }
+
+        .admin-panel .no-movies-msg {
+            margin-top: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .cabinet-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 15px 20px;
+            }
+
+            .cabinet-actions {
+                justify-content: flex-start;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .cabinet-section {
+                padding: 0 10px;
+            }
+
+            .admin-panel .cabinet-btn {
+                margin-bottom: 10px;
+                margin-right: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .admin-panel ul li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .admin-panel ul li a {
+                margin-top: 6px;
+                width: auto;
+            }
         }
     </style>
+
     <div class="cabinet-header">
         <div class="welcome">
             Добро пожаловать, {{ $user->name ?? ($user->email ?? 'пользователь') }}!
         </div>
         <div class="cabinet-actions">
-            <a href="{{ route('main') }}" class="cabinet-btn">На главную</a>
+            <a href="{{ route('main') }}">На главную</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="cabinet-btn logout" type="submit">Выйти</button>
+                <button type="submit" class="logout">Выйти</button>
             </form>
         </div>
     </div>
+
     <div class="cabinet-section">
         @if ($user->isUser())
             <h2>Ваши купленные билеты</h2>
             @if (count($tickets) === 0)
-                <div style="margin:2em 0; color:#d45511; background:#ffe3cc; padding:1em 1.5em; border-radius: 8px;">
+                <div class="no-tickets-msg">
                     У вас пока нет купленных билетов.
                 </div>
             @else
@@ -126,7 +244,6 @@
                             <div class="ticket-movie">
                                 {{ optional($ticket->session)->movie->title ?? 'Сеанс не найден' }}
                             </div>
-
                             <div class="ticket-info">
                                 @if ($ticket->session)
                                     Сеанс: {{ date('d.m.Y H:i', strtotime($ticket->session->session_datetime)) }}<br>
@@ -134,7 +251,7 @@
                                     <span style="color:#c91a1a;">Сеанс удалён или не найден</span><br>
                                 @endif
                                 Место: {{ $ticket->seat ?? '—' }}, Цена:
-                                {{ number_format($ticket->session->price, 0, '', ' ') }}₽
+                                {{ number_format(optional($ticket->session)->price ?? 0, 0, '', ' ') }}₽
                             </div>
                         </div>
                     @endforeach
@@ -143,32 +260,23 @@
         @elseif ($user->isAdmin())
             <div class="admin-panel">
                 <h2>Панель администратора</h2>
-                <a href="{{ route('admin.sessions.create') }}" class="cabinet-btn"
-                    style="background: #ffe36c; color: #5b4331;">
-                    Создать сеанс
-                </a>
-                <a href="{{ route('admin.movies.create') }}" class="cabinet-btn"
-                    style="background: #b0eaf1; color: #1b3840; margin-left:1.1em;">
-                    Добавить фильм
-                </a>
+                <a href="{{ route('admin.sessions.create') }}" class="cabinet-btn">Создать сеанс</a>
+                <a href="{{ route('admin.movies.create') }}" class="cabinet-btn">Добавить фильм</a>
 
-                {{-- Спиcок фильмов с кнопками для перехода на редактирование --}}
-                <div style="margin-top: 2em;">
-                    <h4>Фильмы:</h4>
+                <div>
+                    <h3 style="margin-top: 2rem; font-weight: 700;">Фильмы:</h3>
                     @if (isset($movies) && count($movies))
-                        <ul style="list-style:none; padding:0;">
+                        <ul>
                             @foreach ($movies as $movie)
-                                <li style="margin-bottom: 0.7em;">
-                                    <span style="font-weight:500;">{{ $movie->title }}</span>
-                                    <a href="{{ url('admin/movies/' . $movie->id . '/edit') }}" class="cabinet-btn"
-                                        style="margin-left:1.5em;">
-                                        Редактировать
-                                    </a>
+                                <li>
+                                    <span>{{ $movie->title }}</span>
+                                    <a href="{{ url('admin/movies/' . $movie->id . '/edit') }}"
+                                        class="cabinet-btn">Редактировать</a>
                                 </li>
                             @endforeach
                         </ul>
                     @else
-                        <div style="color: #a86a10; margin-top:1em;">Фильмы не найдены.</div>
+                        <div class="no-movies-msg">Фильмы не найдены.</div>
                     @endif
                 </div>
             </div>
