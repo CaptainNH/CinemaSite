@@ -39,7 +39,7 @@ class AdminMovieController extends Controller
         $movie = Movie::create([
             'title' => $request->title,
             'description' => $request->description,
-            'poster_path' => $posterPath,
+            'image' => $posterPath,
         ]);
 
         return redirect()->back()->with('success', 'Фильм успешно добавлен!');
@@ -74,7 +74,7 @@ class AdminMovieController extends Controller
             }
 
             // Сохраняем новый постер
-            $validated['poster_path'] = $request->file('poster')->store('posters', 'public');
+            $validated['image'] = $request->file('poster')->store('posters', 'public');
         }
 
         $movie->update($validated);

@@ -13,14 +13,14 @@
         }
 
         /* .header {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            padding: 20px 40px;
-                            background-color: #121212;
-                            color: #fff;
-                            border-bottom: 1px solid #222;
-                        } */
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 20px 40px;
+                                    background-color: #121212;
+                                    color: #fff;
+                                    border-bottom: 1px solid #222;
+                                } */
 
         .header {
             position: fixed;

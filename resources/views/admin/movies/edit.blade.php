@@ -247,8 +247,8 @@
 
             <div class="mb-3">
                 <label for="poster">Постер:</label>
-                @if ($movie->poster_path)
-                    <img src="{{ asset('storage/' . $movie->poster_path) }}" alt="Постер" class="poster-preview">
+                @if ($movie->image)
+                    <img src="{{ asset('storage/' . $movie->image) }}" alt="Постер" class="poster-preview">
                 @endif
                 <input type="file" name="poster" id="poster" accept="image/jpeg,image/png"
                     class="@error('poster') is-invalid @enderror">
