@@ -13,14 +13,14 @@
         }
 
         /* .header {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    padding: 20px 40px;
-                                    background-color: #121212;
-                                    color: #fff;
-                                    border-bottom: 1px solid #222;
-                                } */
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            padding: 20px 40px;
+                                            background-color: #121212;
+                                            color: #fff;
+                                            border-bottom: 1px solid #222;
+                                        } */
 
         .header {
             position: fixed;
@@ -90,6 +90,7 @@
         }
 
         .poster-section {
+            min-height: 100vh;
             padding: 40px 40px;
             padding-bottom: 120px;
             background-color: #121212;
