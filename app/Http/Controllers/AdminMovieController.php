@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class AdminMovieController extends Controller
 {
@@ -22,17 +23,26 @@ class AdminMovieController extends Controller
 
     public function store(Request $request)
     {
-        // Сохранить фильм
-        $data = $request->validate([
-            'title' => 'required|string|max:140',
+        $request->validate([
+            'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // Добавьте другие поля по необходимости
+            'poster' => 'nullable|image|max:2048',
         ]);
 
-        Movie::create($data);
+        $posterPath = null;
+        if ($request->hasFile('poster')) {
+            // Сохраняем файл в "storage/app/public/posters"
+            // В posterPath будет лежать строка типа "posters/имяфайла.jpg"
+            $posterPath = $request->file('poster')->store('posters', 'public');
+        }
 
-        return redirect()->route('cabinet')
-            ->with('success', 'Фильм успешно добавлен!');
+        $movie = Movie::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'poster_path' => $posterPath,
+        ]);
+
+        return redirect()->back()->with('success', 'Фильм успешно добавлен!');
     }
 
     public function show($id)
@@ -49,30 +59,38 @@ class AdminMovieController extends Controller
         return view('admin.movies.edit', compact('movie'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        // Обновить данные фильма
-        $movie = Movie::findOrFail($id);
-
-        $data = $request->validate([
-            'title' => 'required|string|max:140',
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // Добавьте другие поля по необходимости
+            'poster' => 'nullable|image|max:2048',
         ]);
 
-        $movie->update($data);
+        if ($request->hasFile('poster')) {
+            // Удаляем старый постер, если он существует
+            if ($movie->poster_path) {
+                Storage::disk('public')->delete($movie->poster_path);
+            }
 
-        return redirect()->route('cabinet')
-            ->with('success', 'Фильм успешно обновлен!');
+            // Сохраняем новый постер
+            $validated['poster_path'] = $request->file('poster')->store('posters', 'public');
+        }
+
+        $movie->update($validated);
+
+        return redirect()->route('cabinet')->with('success', 'Фильм успешно обновлен!');
     }
 
-    public function destroy($id)
+    public function destroy(Movie $movie)
     {
-        // Удалить фильм
-        $movie = Movie::findOrFail($id);
+        // Удаляем постер, если он существует
+        if ($movie->poster_path) {
+            Storage::disk('public')->delete($movie->poster_path);
+        }
+
         $movie->delete();
 
-        return redirect()->route('cabinet')
-            ->with('success', 'Фильм успешно удалён!');
+        return redirect()->route('cabinet')->with('success', 'Фильм успешно удален!');
     }
 }
