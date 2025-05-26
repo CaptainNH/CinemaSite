@@ -26,14 +26,14 @@ class AdminMovieController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'poster' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $posterPath = null;
-        if ($request->hasFile('poster')) {
+        if ($request->hasFile('image')) {
             // Сохраняем файл в "storage/app/public/posters"
             // В posterPath будет лежать строка типа "posters/имяфайла.jpg"
-            $posterPath = $request->file('poster')->store('posters', 'public');
+            $posterPath = $request->file('image')->store('posters', 'public');
         }
 
         $movie = Movie::create([
