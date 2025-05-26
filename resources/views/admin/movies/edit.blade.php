@@ -20,7 +20,7 @@
             color: #fff;
             padding: 20px 40px;
             border-bottom: 1px solid #222;
-            border-radius: 0 0 8px 8px;
+            /* border-radius: 0 0 8px 8px; */
             margin-bottom: 2rem;
         }
 
@@ -145,12 +145,12 @@
         }
 
         .btn-primary {
-            background-color: #c91a1a;
+            background-color: #707070;
             color: #fff;
         }
 
         .btn-primary:hover {
-            background-color: #a60707;
+            background-color: #585858;
         }
 
         .btn-outline-secondary {

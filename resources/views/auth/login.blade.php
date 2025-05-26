@@ -49,15 +49,15 @@
             padding: 12px;
             border: none;
             border-radius: 6px;
-            background-color: #b10d0d;
-            color: #fff;
+            background-color: #ffffff;
+            color: #000000;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .login-box button:hover {
-            background-color: #900a0a;
+            background-color: #545454;
         }
 
         .error-messages {

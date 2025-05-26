@@ -12,7 +12,22 @@
             color: #222;
         }
 
+        /* .header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 20px 40px;
+                            background-color: #121212;
+                            color: #fff;
+                            border-bottom: 1px solid #222;
+                        } */
+
         .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -21,6 +36,7 @@
             color: #fff;
             border-bottom: 1px solid #222;
         }
+
 
         .logo {
             font-size: 1.8em;
@@ -56,6 +72,7 @@
             color: #222;
             padding: 30px 20px;
             text-align: center;
+            margin-top: 80px;
             border-bottom: 1px solid #ccc;
         }
 
@@ -74,6 +91,7 @@
 
         .poster-section {
             padding: 40px 40px;
+            padding-bottom: 120px;
             background-color: #121212;
         }
 
@@ -168,13 +186,19 @@
         }
 
         .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background-color: #121212;
             color: #aaa;
             text-align: center;
             padding: 20px;
             font-size: 0.9em;
             border-top: 1px solid #222;
+            z-index: 1000;
         }
+
 
         @media (max-width: 768px) {
             .poster-section {

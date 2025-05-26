@@ -7,6 +7,7 @@
             color: #fff;
             padding: 40px 20px;
             min-height: calc(100vh - 60px);
+            padding-bottom: 120px;
         }
 
         .movie-content {
@@ -73,12 +74,12 @@
         }
 
         .btn-buy {
-            background-color: #b10d0d;
+            background-color: #777777;
             color: #fff;
         }
 
         .btn-buy:hover {
-            background-color: #900a0a;
+            background-color: #4b4b4b;
         }
 
         .btn[disabled] {
@@ -95,12 +96,17 @@
         }
 
         .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background-color: #121212;
             color: #aaa;
             text-align: center;
             padding: 20px;
             font-size: 0.9em;
             border-top: 1px solid #222;
+            z-index: 1000;
         }
     </style>
 

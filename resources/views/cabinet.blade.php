@@ -20,7 +20,7 @@
             color: #fff;
             padding: 20px 40px;
             border-bottom: 1px solid #222;
-            border-radius: 0 0 8px 8px;
+            /* border-radius: 0 0 8px 8px; */
             margin-bottom: 2rem;
         }
 
@@ -132,8 +132,8 @@
         }
 
         .admin-panel .cabinet-btn {
-            background-color: #121212;
-            color: #fff;
+            background-color: #d2d2d2;
+            color: #000000;
             margin-right: 1rem;
             padding: 10px 20px;
             border-radius: 6px;
@@ -142,7 +142,7 @@
         }
 
         .admin-panel .cabinet-btn:hover {
-            background-color: #2770d7;
+            background-color: #515151;
         }
 
         .admin-panel ul {
