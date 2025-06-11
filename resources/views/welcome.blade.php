@@ -12,16 +12,6 @@
             color: #222;
         }
 
-        /* .header {
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                            padding: 20px 40px;
-                                            background-color: #121212;
-                                            color: #fff;
-                                            border-bottom: 1px solid #222;
-                                        } */
-
         .header {
             position: fixed;
             top: 0;
@@ -36,7 +26,6 @@
             color: #fff;
             border-bottom: 1px solid #222;
         }
-
 
         .logo {
             font-size: 1.8em;
@@ -67,46 +56,58 @@
             display: inline;
         }
 
-        .date-panel {
-            background-color: #fafafa;
-            color: #222;
-            padding: 30px 20px;
+        .poster-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 40px 20px;
+            margin-top: 70px;
+            background-color: #121212;
+            color: #fff;
             text-align: center;
-            margin-top: 80px;
-            border-bottom: 1px solid #ccc;
         }
 
-        .date-panel label {
+        .poster-title {
+            font-size: 2.2em;
+            margin: 0 0 20px 0;
+        }
+
+        .date-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #1e1e1e;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .date-selector label {
             font-weight: 500;
             font-size: 1.1em;
+            color: #fff;
         }
 
-        .date-panel input[type="date"] {
-            margin-left: 10px;
+        .date-selector input[type="date"] {
             padding: 10px 14px;
             font-size: 1em;
             border: 1px solid #ccc;
             border-radius: 4px;
+            background-color: #fff;
         }
 
         .poster-section {
             min-height: 100vh;
-            padding: 40px 40px;
-            padding-bottom: 120px;
+            padding: 0 40px 120px;
             background-color: #121212;
-        }
-
-        .poster-title {
-            text-align: center;
-            font-size: 2.2em;
-            color: #fff;
-            margin-bottom: 40px;
         }
 
         .movies-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .poster-card {
@@ -184,6 +185,7 @@
             font-size: 1.3em;
             margin-top: 60px;
             color: #888;
+            grid-column: 1 / -1;
         }
 
         .footer {
@@ -200,12 +202,7 @@
             z-index: 1000;
         }
 
-
         @media (max-width: 768px) {
-            .poster-section {
-                padding: 30px 20px;
-            }
-
             .header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -214,11 +211,82 @@
             .auth-buttons {
                 margin-top: 10px;
             }
+
+            .poster-header {
+                padding: 20px;
+            }
+
+            .poster-section {
+                padding: 0 20px 120px;
+            }
+
+            .date-selector {
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px;
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .brand-address {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                gap: 10px;
+            }
+
+            .logo-image {
+                height: 30px;
+            }
+
+            .brand-name {
+                font-size: 1.5em;
+            }
+
+            .brand-address {
+                font-size: 0.8em;
+                display: none;
+                /* Скрываем адрес на мобильных */
+            }
         }
     </style>
 
     <div class="header">
-        <div class="logo">Смотрим кино</div>
+        {{-- <div class="logo">Смотрим кино</div> --}}
+        <div class="logo-container">
+            <img src="{{ asset('images/logo.png') }}" alt="Логотип" class="logo-image">
+            <div class="brand-info">
+                <div class="brand-name">Смотрим кино</div>
+                <div class="brand-address">Владикавказ, Проспект Доватора, 15Б</div>
+            </div>
+        </div>
         <div class="auth-buttons">
             @auth
                 <a href="{{ route('cabinet') }}">Личный кабинет</a>
@@ -233,18 +301,18 @@
         </div>
     </div>
 
-    <div class="date-panel">
-        <form method="GET">
-            <label>
-                Выберите дату:
-                <input type="date" name="date" value="{{ $date }}" min="{{ date('Y-m-d') }}"
+    <div class="poster-header">
+        <h1 class="poster-title">Афиша</h1>
+        <div class="date-selector">
+            <form method="GET">
+                <label for="date-picker">Дата:</label>
+                <input type="date" id="date-picker" name="date" value="{{ $date }}" min="{{ date('Y-m-d') }}"
                     onchange="this.form.submit()">
-            </label>
-        </form>
+            </form>
+        </div>
     </div>
 
     <section class="poster-section">
-        <div class="poster-title">Афиша</div>
         <div class="movies-grid">
             @forelse ($groupedSessions as $movieId => $sessions)
                 @php $movie = $sessions[0]->movie; @endphp
