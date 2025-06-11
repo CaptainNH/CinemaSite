@@ -17,11 +17,12 @@ class Movie extends Model
     protected $fillable = [
         'title',
         'description',
-        'poster_path',
         'image',
         'director',
         'duration_minutes',
-        'release_date'
+        'release_date',
+        'genre',
+        'country'
     ];
 
     /**

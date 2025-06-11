@@ -27,6 +27,11 @@ class AdminMovieController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'director' => 'nullable|string|max:100',
+            'duration_minutes' => 'nullable|integer|min:0',
+            'release_date' => 'nullable|date',
+            'genre' => 'nullable|string|max:100',
+            'country' => 'nullable|string|max:100',
         ]);
 
         $posterPath = null;
@@ -40,6 +45,11 @@ class AdminMovieController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'image' => $posterPath,
+            'director' => $request->director,
+            'duration_minutes' => $request->duration_minutes,
+            'release_date' => $request->release_date,
+            'genre' => $request->genre,
+            'country' => $request->country
         ]);
 
         return redirect()->back()->with('success', 'Фильм успешно добавлен!');
@@ -69,8 +79,8 @@ class AdminMovieController extends Controller
 
         if ($request->hasFile('poster')) {
             // Удаляем старый постер, если он существует
-            if ($movie->poster_path) {
-                Storage::disk('public')->delete($movie->poster_path);
+            if ($movie->image) {
+                Storage::disk('public')->delete($movie->image);
             }
 
             // Сохраняем новый постер
@@ -85,8 +95,8 @@ class AdminMovieController extends Controller
     public function destroy(Movie $movie)
     {
         // Удаляем постер, если он существует
-        if ($movie->poster_path) {
-            Storage::disk('public')->delete($movie->poster_path);
+        if ($movie->image) {
+            Storage::disk('public')->delete($movie->image);
         }
 
         $movie->delete();

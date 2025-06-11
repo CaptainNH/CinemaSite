@@ -250,7 +250,8 @@
                                 @else
                                     <span style="color:#c91a1a;">Сеанс удалён или не найден</span><br>
                                 @endif
-                                Место: {{ $ticket->seat ?? '—' }}, Цена:
+                                {{-- Место: {{ $ticket->seat ?? '—' }},  --}}
+                                Цена:
                                 {{ number_format(optional($ticket->session)->price ?? 0, 0, '', ' ') }}₽
                             </div>
                         </div>

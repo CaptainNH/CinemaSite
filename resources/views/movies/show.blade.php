@@ -123,6 +123,9 @@
                 <div class="movie-meta">
                     <b>Режиссёр:</b> {{ $movie->director ?? '-' }}<br>
                     <b>Длительность:</b> {{ $movie->duration_minutes ?? '?' }} мин
+                    <b>Дата выхода:</b> {{ $movie->release_date ?? '-' }}<br>
+                    <b>Жанр:</b> {{ $movie->genre ?? '?' }}
+                    <b>Страна:</b> {{ $movie->country ?? '?' }}
                 </div>
             </div>
         </div>
