@@ -41,7 +41,23 @@
         }
 
         .movie-meta {
-            font-size: 1rem;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .meta-row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            min-width: 120px;
+            color: #aaa;
+        }
+
+        .meta-value {
             color: #aaa;
         }
 
@@ -121,11 +137,27 @@
                     <div class="movie-description">{{ $movie->description }}</div>
                 @endif
                 <div class="movie-meta">
-                    <b>Режиссёр:</b> {{ $movie->director ?? '-' }}<br>
-                    <b>Длительность:</b> {{ $movie->duration_minutes ?? '?' }} мин
-                    <b>Дата выхода:</b> {{ $movie->release_date ?? '-' }}<br>
-                    <b>Жанр:</b> {{ $movie->genre ?? '?' }}
-                    <b>Страна:</b> {{ $movie->country ?? '?' }}
+                    <div class="meta-row">
+                        <span class="meta-label">Режиссёр:</span>
+                        <span class="meta-value">{{ $movie->director ?? '-' }}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Длительность:</span>
+                        <span class="meta-value">{{ $movie->duration_minutes ?? '?' }} мин</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Дата выхода:</span>
+                        <span
+                            class="meta-value">{{ $movie->release_date ? \Carbon\Carbon::parse($movie->release_date)->format('d.m.Y') : '-' }}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Жанр:</span>
+                        <span class="meta-value">{{ $movie->genre ?? '?' }}</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Страна:</span>
+                        <span class="meta-value">{{ $movie->country ?? '?' }}</span>
+                    </div>
                 </div>
             </div>
         </div>

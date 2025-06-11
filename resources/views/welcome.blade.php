@@ -2,6 +2,8 @@
 
 @section('content')
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
         body,
         html {
             margin: 0;
@@ -245,6 +247,7 @@
 
         .brand-name {
             font-size: 1.8em;
+            font-family: 'DotGothic16', sans-serif;
             font-weight: bold;
             color: #ffffff;
             line-height: 1;
