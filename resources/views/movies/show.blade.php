@@ -20,6 +20,8 @@
 
         .movie-poster {
             width: 260px;
+            height: 380px;
+            object-fit: cover;
             border-radius: 13px;
             box-shadow: 0 4px 18px rgba(162, 200, 250, 0.5);
         }
