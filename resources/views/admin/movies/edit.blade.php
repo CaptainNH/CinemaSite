@@ -169,6 +169,7 @@
             background-color: #c90d0d;
             color: #fff;
             margin-top: 1rem;
+            margin-bottom: 15px;
         }
 
         .btn-danger:hover {

@@ -149,6 +149,7 @@
             font-family: 'Segoe UI', sans-serif;
             transition: background-color 0.3s ease;
             user-select: none;
+            margin-bottom: 15px;
         }
 
         .btn-primary {
